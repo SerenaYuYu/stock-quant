@@ -1,0 +1,30 @@
+name: 每日抓取台股資料
+
+on:
+  schedule:
+    - cron: "0 6 * * 1-5"  # 台灣時間週一到週五 14:00（UTC 6:00），收盤後
+  workflow_dispatch: {}     # 允許手動觸發
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - run: python scripts/fetch_data.py
+        env:
+          FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
+
+      - name: 提交更新的資料
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "自動更新股票資料 $(date +%Y-%m-%d)"
+          git push
