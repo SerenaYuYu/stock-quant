@@ -5,6 +5,9 @@ on:
     - cron: "0 6 * * 1-5"  # 台灣時間週一到週五 14:00（UTC 6:00），收盤後
   workflow_dispatch: {}     # 允許手動觸發
 
+permissions:
+  contents: write  # 允許 workflow 用 GITHUB_TOKEN push 回 repo
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
