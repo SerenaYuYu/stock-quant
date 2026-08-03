@@ -1,0 +1,8 @@
+name = "stock-quant-line-bot"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Workers KV：存追蹤股票清單，key 固定用 "watchlist"
+[[kv_namespaces]]
+binding = "WATCHLIST_KV"
+id = "95ad2726fae44f31a110d31284f42a3e"
