@@ -32,9 +32,3 @@ jobs:
           git diff --cached --quiet || git commit -m "自動更新股票資料 $(date +%Y-%m-%d)"
           git pull --rebase
           git push
-
-      - name: 檢查均線交叉訊號並發 LINE 通知
-        run: python scripts/check_signal_and_notify.py
-        env:
-          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
