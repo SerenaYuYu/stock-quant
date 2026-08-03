@@ -2,7 +2,11 @@ name = "stock-quant-line-bot"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
 
-# Workers KV：存追蹤股票清單，key 固定用 "watchlist"
+# 每日台灣時間 14:10（收盤後，晚 fetch_data.py 一點）觸發均線交叉推播，UTC 6:10
+[triggers]
+crons = ["10 6 * * 1-5"]
+
+# Workers KV：存每位使用者的追蹤清單
 [[kv_namespaces]]
 binding = "WATCHLIST_KV"
 id = "95ad2726fae44f31a110d31284f42a3e"
