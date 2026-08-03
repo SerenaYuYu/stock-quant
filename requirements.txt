@@ -1,3 +1,4 @@
 FinMind
 backtesting
 pandas
+requests
